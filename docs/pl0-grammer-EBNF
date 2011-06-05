@@ -1,0 +1,31 @@
+# Modify from http://en.wikipedia.org/wiki/PL/0, according to the textbook <<编译原理及编译程序构造>> http://book.douban.com/subject/1231294/
+# This textbook made some changes to the PL/0 language, such as remove keyword ! and #, add read(), write() and <>.
+# read() and write() are like function rather than procedure, but PL/0 has no function !!!
+
+ident = ["a"-"z""A"-"Z"]["a"-"z""A"-"Z""0"-"9"]*
+
+number = ["0"-"9"]+
+
+program = block "."
+
+block = [ "const" ident "=" number {"," ident "=" number} ";"]
+        [ "var" ident {"," ident} ";"]
+        { "procedure" ident ";" block ";" } statement
+
+statement = [ ident ":=" expression | "call" ident |
+            "begin" statement {";" statement } "end" |
+            "if" condition "then" statement |
+            "while" condition "do" statement |
+            "read" "(" ident {"," ident} ")" |
+            "write" "(" expression {"," expression} ")" ]
+
+condition = "odd" expression |
+            expression ("="|"<>"|"<"|"<="|">"|">=") expression
+
+expression = [ "+"|"-"] term { ("+"|"-") term}
+
+term = factor {("*"|"/") factor}
+
+factor = ident | number | "(" expression ")"
+
+

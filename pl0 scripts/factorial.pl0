@@ -1,0 +1,19 @@
+const num = 5;
+var x, accum;
+
+procedure factorial;
+begin
+    if x = 1 then  write(accum);
+    if x > 1 then begin
+        accum := accum * x;
+        x := x - 1;
+        call factorial
+    end
+end;
+
+begin
+    x := num;
+    accum := 1;
+    call factorial;
+end.
+

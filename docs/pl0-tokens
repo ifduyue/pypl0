@@ -1,0 +1,15 @@
+keywords:
+    begin, call, const, do, end, if, in, odd, out, procedure, then, var, while, read, write.
+
+strings:
+    delimited by double quotes
+    
+numbers:
+    a string of demical digits
+    
+identifiers:
+    any string that begins with a letter
+
+others (operators, relations, and punctuation marks):
+    +, -, *, /, =, #, <, >, <=, >=, (, ), ,, ;, ., :=.
+

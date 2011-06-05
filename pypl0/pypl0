@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+# This library is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import os, sys
+
+def main():
+    from optparse import OptionParser
+    
+    usage = '''
+%prog option FILE
+use %prog -h to get help'''
+    parser = OptionParser(usage)
+    parser.add_option("-p", "--parse", dest="pfile", action="store", type="string", help="parse file and print pcode")
+    parser.add_option("-i", "--interpreter", dest="ifile", action="store", type="string", help="parse file and interpreter pcode")
+    (options, args) = parser.parse_args()
+    
+    if options.pfile is None and options.ifile is None:
+        path = os.path.abspath(sys.path[0]) + os.sep + 'gui'
+        os.chdir(path)
+        os.execv('/usr/bin/env', ['/usr/bin/env', 'python', 'gui.py'])
+    else:
+        if options.pfile:
+            parse(options.pfile)
+        elif options.ifile:
+            interpreter(options.ifile)
+
+def parse(pfile):
+    from backend.parser import Parser
+    p = Parser(pfile)
+    if p.error:
+        print 'ERROR\N', p.error
+        return False
+    else:
+        print p.get_formated_pcode()
+        return p.pcode.pcode
+
+def interpreter(ifile):
+    pcode = parse(ifile)
+    if pcode:
+        from backend.interpreter import Interpreter
+        i = Interpreter(pcode)
+        i.run()
+    
+if __name__ == '__main__':
+    main()
+    

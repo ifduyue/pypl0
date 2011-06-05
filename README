@@ -1,0 +1,54 @@
+A python implemented PL/0 compiler
+lyxint  <lyxint@gmail.com>
+
+How to use
+first you shoudl change directory to the source code directory pypl0, then the pypl0 is the executable file
+1.GUI
+    ./pypl0
+2.CLI
+    ./pypl0 option FILE
+    use pypl0 -h get help
+    
+    Options:
+      -h, --help            show this help message and exit
+      -p PFILE, --parse=PFILE
+                            parse file and print pcode
+      -i IFILE, --interpreter=IFILE
+                            parse file and interpreter pcode
+
+Direcory Layout
+-------------------------------------------------------------------------------------------
+PyPL0                           ...... project root
+|-- docs
+|   |-- pl0-grammer-EBNF        ...... documents
+|   `-- pl0-tokens
+|-- LICENSE
+|-- pl0 scripts                 ...... PL/0 source code for testing
+|   |-- cockrabbit.pl0
+|   |-- empty.pl0
+|   |-- expression.pl0
+|   |-- factorial.pl0
+|   |-- gcd2.pl0
+|   |-- gcd.pl0
+|   |-- minimal.pl0
+|   |-- prime.pl0
+|   `-- square.pl0
+|-- pypl0                        ...... source code
+|   |-- backend
+|   |   |-- ast.py
+|   |   |-- __init__.py
+|   |   |-- interpreter.py
+|   |   |-- parser.py
+|   |   `-- scanner.py
+|   |-- gui
+|   |   |-- gtkcodebuffer.py
+|   |   |-- gui.py
+|   |   `-- pl0.xml
+|   `-- pypl0                    ...... executable file
+|-- pypl0_.kpf
+|-- README
+|-- THANKS
+`-- VERSION
+
+5 directories, 26 files
+-------------------------------------------------------------------------------------------
